@@ -1,0 +1,123 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <header class="bg-black text-white">
+        <div class="container mx-auto flex justify-between items-center py-4 px-6">
+            
+            <!-- Logo -->
+            <div class="flex items-center space-x-3">
+                <img src="/images/Logo.png" alt="Logo" class="h-12 w-12 rounded-full border-2 border-green-500">
+                <div>
+                    <h1 class="text-lg font-bold">Land Insights</h1>
+                    <p class="text-sm italic text-green-500">Understanding Agriculture & Irrigation</p>
+                </div>
+            </div>
+    
+            <!-- Navbar Links -->
+            <nav class="flex space-x-6">
+                
+                <a href="index.html" class="text-green-500 border-b-2 border-green-500">Home</a>
+                <a href="data-entry.html" class="hover:text-green-500">Data Entry</a>
+                <a href="visualization.html" class="hover:text-green-500">Visualization</a>
+                <a href="about.html" class="hover:text-green-500">About</a>
+                <a href="contact.html" class="hover:text-green-500">Contact</a>
+            </nav>
+            
+            <!-- Language Selector -->
+            <div class="relative group">
+                <button class="flex items-center space-x-2 text-green-500 cursor-pointer">
+                    <img src="/images/images.png" alt="Language" class="h-6 w-6">
+                    <span>English</span>
+                    <!-- <i class="fas fa-chevron-down"></i> -->
+                </button>
+    
+                <div class="absolute top-0 left-0 hidden group-hover:block bg-white text-black shadow-lg rounded-md mt-2 w-48 z-50">
+                    <ul class="py-2">
+                        <li class="px-4 py-2 hover:bg-green-100 cursor-pointer">বাংলা - Bengali</li>
+                        <li class="px-4 py-2 hover:bg-green-100 cursor-pointer">English</li>
+                        <li class="px-4 py-2 hover:bg-green-100 cursor-pointer">ગુજરાતી - Gujarati</li>
+                        <li class="px-4 py-2 hover:bg-green-100 cursor-pointer">हिन्दी - Hindi</li>
+                        <li class="px-4 py-2 hover:bg-green-100 cursor-pointer">ಕನ್ನಡ - Kannada</li>
+                        <li class="px-4 py-2 hover:bg-green-100 cursor-pointer">മലയാളം - Malayalam</li>
+                        <li class="px-4 py-2 hover:bg-green-100 cursor-pointer">मराठी - Marathi</li>
+                        <li class="px-4 py-2 hover:bg-green-100 cursor-pointer">ਪੰਜਾਬੀ - Punjabi</li>
+                        <li class="px-4 py-2 hover:bg-green-100 cursor-pointer">தமிழ் - Tamil</li>
+                        <li class="px-4 py-2 hover:bg-green-100 cursor-pointer">తెలుగు - Telugu</li>
+                    </ul>
+                </div>
+            </div>
+    
+            <!-- Search Icon -->
+            <div>
+                <i class="fas fa-search text-green-500 cursor-pointer"></i>
+            </div>
+        </div>
+    </header>
+
+
+
+    <!-- Hero Section -->
+    <section 
+        class=" h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat bg-fixed relative"
+        style="background-image: url('../images/background.avif');">
+        <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+
+        <div class="relative z-10 text-center max-w-3xl mx-4">
+            <h1 class="text-7xl font-bold text-green-400">Land Insights</h1>
+            <p class="text-3xl text-green-300 italic mt-2">
+                Empowering Farmers with Data-Driven Insights
+            </p>
+            <p class="text-xl text-gray-300 mt-4 leading-relaxed">
+                Our platform provides comprehensive analysis of land holdings, irrigation systems, 
+                and cropping patterns to enhance agricultural productivity.
+                Emphasizing sustainable farming practices, 'Land Insights' encourages smarter resource management to boost productivity while preserving the environment.
+            </p>
+            <button 
+                class="bg-green-500 hover:bg-green-600 text-black text-xl font-bold px-8 py-4 mt-6 rounded-lg transition-transform hover:scale-105">
+                Get Started
+            </button>
+        </div>
+    </section>
+
+    <!-- Key Highlights Section -->
+    <section class="py-16 px-8">
+        <h2 class="text-3xl font-bold text-center text-green-400 mb-10">Key Highlights</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            <!-- Card 1 -->
+            <div class="bg-gray-800 p-6 rounded-xl shadow-lg hover:scale-105 transition-transform">
+                <h3 class="text-xl font-bold text-green-400 mb-2">Land Analysis</h3>
+                <p class="text-gray-300">Detailed insights into land distribution and ownership patterns in various regions.</p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-gray-800 p-6 rounded-xl shadow-lg hover:scale-105 transition-transform">
+                <h3 class="text-xl font-bold text-green-400 mb-2">Irrigation Insights</h3>
+                <p class="text-gray-300">Track water sources like wells, canals, and tube wells to understand irrigation patterns.</p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-gray-800 p-6 rounded-xl shadow-lg hover:scale-105 transition-transform">
+                <h3 class="text-xl font-bold text-green-400 mb-2">Crop Mapping</h3>
+                <p class="text-gray-300">Explore crop patterns across diverse regions with real-time visualization tools.</p>
+            </div>
+        </div>
+    </section>
+    
+</body>
+</html>
+
+
+
+
+
+
+

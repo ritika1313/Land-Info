@@ -1,0 +1,9 @@
+@import "tailwindcss";
+/* this command will add 3 things
+base
+utilities
+components */
+
+/* npx @tailwindcss/cli -i ./src/main.css -o ./src/output.css --watch
+after this output.css file is created 
+*/
