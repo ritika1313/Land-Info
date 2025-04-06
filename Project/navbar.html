@@ -1,87 +1,89 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Land Insights</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <header class="bg-black text-white">
+<body class="bg-gray-900 text-white">
+
+    <!-- Header -->
+    <header class="bg-black text-white shadow-lg">
         <div class="container mx-auto flex justify-between items-center py-4 px-6">
             
             <!-- Logo -->
             <div class="flex items-center space-x-3">
-                <img src="/images/Logo.png" alt="Logo" class="h-12 w-12 rounded-full border-2 border-green-500">
+                <img src="/images/Logo.png" alt="Logo" class="h-12 w-12 rounded-full border-2 border-green-500 transform hover:rotate-12 hover:scale-110 transition-all duration-300">
                 <div>
                     <h1 class="text-lg font-bold">Land Insights</h1>
                     <p class="text-sm italic text-green-500">Understanding Agriculture & Irrigation</p>
                 </div>
             </div>
     
-            <!-- Navbar Links -->
-            <nav class="flex space-x-6">
-                
-                <a href="index.html" class="text-green-500 border-b-2 border-green-500">Home</a>
-                <a href="data-entry.html" class="hover:text-green-500">Data Entry</a>
-                <a href="visualization.html" class="hover:text-green-500">Visualization</a>
-                <a href="about.html" class="hover:text-green-500">About</a>
-                <a href="contact.html" class="hover:text-green-500">Contact</a>
+            <!-- Navbar -->
+            <nav class="flex space-x-6 text-lg">
+                <a href="index.html" class="relative text-green-500 font-bold border-b-2 border-green-500 after:absolute after:w-0 after:h-1 after:bg-green-500 after:left-0 after:bottom-0 after:transition-all after:duration-500 hover:after:w-full transform transition-all duration-500 hover:scale-110 hover:text-green-300">Home</a>
+                <a href="data-entry.html" class="relative text-white font-bold after:absolute after:w-0 after:h-1 after:bg-green-500 after:left-0 after:bottom-0 after:transition-all after:duration-500 hover:after:w-full transform transition-all duration-500 hover:scale-110 hover:text-green-300">Data Entry</a>
+                <a href="visualization.html" class="relative text-white font-bold after:absolute after:w-0 after:h-1 after:bg-green-500 after:left-0 after:bottom-0 after:transition-all after:duration-500 hover:after:w-full transform transition-all duration-500 hover:scale-110 hover:text-green-300">Visualization</a>
+                <a href="about.html" class="relative text-white font-bold after:absolute after:w-0 after:h-1 after:bg-green-500 after:left-0 after:bottom-0 after:transition-all after:duration-500 hover:after:w-full transform transition-all duration-500 hover:scale-110 hover:text-green-300">About</a>
+                <a href="contact.html" class="relative text-white font-bold after:absolute after:w-0 after:h-1 after:bg-green-500 after:left-0 after:bottom-0 after:transition-all after:duration-500 hover:after:w-full transform transition-all duration-500 hover:scale-110 hover:text-green-300">Contact</a>
             </nav>
             
             <!-- Language Selector -->
-            <div class="relative group">
-                <button class="flex items-center space-x-2 text-green-500 cursor-pointer">
-                    <img src="/images/images.png" alt="Language" class="h-6 w-6">
-                    <span>English</span>
-                    <!-- <i class="fas fa-chevron-down"></i> -->
-                </button>
-    
-                <div class="absolute top-0 left-0 hidden group-hover:block bg-white text-black shadow-lg rounded-md mt-2 w-48 z-50">
-                    <ul class="py-2">
-                        <li class="px-4 py-2 hover:bg-green-100 cursor-pointer">বাংলা - Bengali</li>
-                        <li class="px-4 py-2 hover:bg-green-100 cursor-pointer">English</li>
-                        <li class="px-4 py-2 hover:bg-green-100 cursor-pointer">ગુજરાતી - Gujarati</li>
-                        <li class="px-4 py-2 hover:bg-green-100 cursor-pointer">हिन्दी - Hindi</li>
-                        <li class="px-4 py-2 hover:bg-green-100 cursor-pointer">ಕನ್ನಡ - Kannada</li>
-                        <li class="px-4 py-2 hover:bg-green-100 cursor-pointer">മലയാളം - Malayalam</li>
-                        <li class="px-4 py-2 hover:bg-green-100 cursor-pointer">मराठी - Marathi</li>
-                        <li class="px-4 py-2 hover:bg-green-100 cursor-pointer">ਪੰਜਾਬੀ - Punjabi</li>
-                        <li class="px-4 py-2 hover:bg-green-100 cursor-pointer">தமிழ் - Tamil</li>
-                        <li class="px-4 py-2 hover:bg-green-100 cursor-pointer">తెలుగు - Telugu</li>
-                    </ul>
+            <div class="flex items-center space-x-4">
+                <!-- Language Selector -->
+                <div class="relative group">
+                    <button class="flex items-center space-x-2 text-green-500 cursor-pointer hover:scale-110 transition-transform">
+                        <img src="/images/images.png" alt="Language" class="h-6 w-6">
+                        <span>English</span>
+                    </button>
+                    <div class="absolute top-full left-0 hidden group-hover:block bg-white text-black shadow-lg rounded-md mt-1 w-48 z-50">
+                        <ul class="py-2">
+                            <li class="px-4 py-2 hover:bg-green-100 cursor-pointer transition duration-300">বাংলা - Bengali</li>
+                            <li class="px-4 py-2 hover:bg-green-100 cursor-pointer transition duration-300">English</li>
+                            <li class="px-4 py-2 hover:bg-green-100 cursor-pointer transition duration-300">ગુજરાતી - Gujarati</li>
+                            <li class="px-4 py-2 hover:bg-green-100 cursor-pointer transition duration-300">हिन्दी - Hindi</li>
+                            <li class="px-4 py-2 hover:bg-green-100 cursor-pointer transition duration-300">ಕನ್ನಡ - Kannada</li>
+                            <li class="px-4 py-2 hover:bg-green-100 cursor-pointer transition duration-300">മലയാളം - Malayalam</li>
+                            <li class="px-4 py-2 hover:bg-green-100 cursor-pointer transition duration-300">मराठी - Marathi</li>
+                            <li class="px-4 py-2 hover:bg-green-100 cursor-pointer transition duration-300">ਪੰਜਾਬੀ - Punjabi</li>
+                            <li class="px-4 py-2 hover:bg-green-100 cursor-pointer transition duration-300">தமிழ் - Tamil</li>
+                            <li class="px-4 py-2 hover:bg-green-100 cursor-pointer transition duration-300">తెలుగు - Telugu</li>
+                        </ul>
+                    </div>
                 </div>
+            
+                <!-- Signup Button -->
+                <a href="Signup.html" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600 transition">
+                    Signup
+                </a>
             </div>
+            
     
             <!-- Search Icon -->
-            <div>
-                <i class="fas fa-search text-green-500 cursor-pointer"></i>
-            </div>
+            <!-- <div>
+                <i class="fas fa-search text-green-500 cursor-pointer hover:scale-125 hover:text-white transition-all duration-300"></i>
+            </div> -->
+            
         </div>
     </header>
 
-
-
     <!-- Hero Section -->
-    <section 
-        class=" h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat bg-fixed relative"
-        style="background-image: url('../images/background.avif');">
-        <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+    <section class="h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat bg-fixed relative"
+        style="background-image: url('../images/Fm.png');">
+        <div class="absolute inset-0 bg-black bg-opacity-30"></div>
 
         <div class="relative z-10 text-center max-w-3xl mx-4">
-            <h1 class="text-7xl font-bold text-green-400">Land Insights</h1>
+            <h1 class="text-7xl font-bold text-green-400 animate-bounce">Land Insights</h1>
             <p class="text-3xl text-green-300 italic mt-2">
                 Empowering Farmers with Data-Driven Insights
             </p>
             <p class="text-xl text-gray-300 mt-4 leading-relaxed">
                 Our platform provides comprehensive analysis of land holdings, irrigation systems, 
                 and cropping patterns to enhance agricultural productivity.
-                Emphasizing sustainable farming practices, 'Land Insights' encourages smarter resource management to boost productivity while preserving the environment.
             </p>
-            <button 
-                class="bg-green-500 hover:bg-green-600 text-black text-xl font-bold px-8 py-4 mt-6 rounded-lg transition-transform hover:scale-105">
+            <button class="bg-green-500 hover:bg-green-600 text-black text-xl font-bold px-8 py-4 mt-6 rounded-lg transition-all duration-300 hover:scale-110 animate-pulse">
                 Get Started
             </button>
         </div>
@@ -89,35 +91,145 @@
 
     <!-- Key Highlights Section -->
     <section class="py-16 px-8">
-        <h2 class="text-3xl font-bold text-center text-green-400 mb-10">Key Highlights</h2>
+        <h2 class="text-3xl font-bold text-center text-green-200 mb-10">Key Highlights</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
             <!-- Card 1 -->
-            <div class="bg-gray-800 p-6 rounded-xl shadow-lg hover:scale-105 transition-transform">
-                <h3 class="text-xl font-bold text-green-400 mb-2">Land Analysis</h3>
-                <p class="text-gray-300">Detailed insights into land distribution and ownership patterns in various regions.</p>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="bg-gray-800 p-6 rounded-xl shadow-lg hover:scale-105 transition-transform">
-                <h3 class="text-xl font-bold text-green-400 mb-2">Irrigation Insights</h3>
-                <p class="text-gray-300">Track water sources like wells, canals, and tube wells to understand irrigation patterns.</p>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="bg-gray-800 p-6 rounded-xl shadow-lg hover:scale-105 transition-transform">
-                <h3 class="text-xl font-bold text-green-400 mb-2">Crop Mapping</h3>
-                <p class="text-gray-300">Explore crop patterns across diverse regions with real-time visualization tools.</p>
+            <div class="relative p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 hover:shadow-green-500"
+            style="background-image: url('/images/key4.png'); background-size: cover; background-position: center;">
+            
+            <!-- Background Overlay -->
+            <div class="absolute inset-0 bg-black bg-opacity-40 rounded-xl"></div>
+        
+            <!-- Content (placed inside a relative div to stay above the overlay) -->
+            <div class="relative">
+                <h3 class="text-2xl font-bold text-green-400 mb-2">Crop Mapping</h3>
+                <p class="text-white text-lg">
+                    Our platform provides comprehensive land analysis by evaluating landholding patterns, soil quality, and land utilization trends. 
+                    By leveraging geospatial data and historical records, users can gain valuable insights into land productivity and potential areas
+                     for improvement. This analysis helps farmers, researchers, and policymakers make informed decisions about optimal land use, sustainable agricultural practices, and efficient resource allocation.
+                </p>
             </div>
         </div>
-    </section>
+
+            <!-- Card 2 -->
+
+            <div class="relative p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 hover:shadow-green-500"
+            style="background-image: url('/images/key2.png'); background-size: cover; background-position: center;">
+            
+            <!-- Background Overlay -->
+            <div class="absolute inset-0 bg-black bg-opacity-40 rounded-xl"></div>
+        
+            <!-- Content (placed inside a relative div to stay above the overlay) -->
+            <div class="relative">
+                <h3 class="text-2xl font-bold text-green-400 mb-2">Crop Mapping</h3>
+                <p class="text-white text-lg">
+                    Effective irrigation is crucial for maximizing crop yield and conserving water resources. Our platform offers detailed insights into various 
+                    irrigation methods, water availability, and efficiency levels. By analyzing real-time data on groundwater levels, rainfall patterns, and irrigation
+                     coverage, users can identify the best irrigation strategies suited for their land. The platform also highlights government schemes and sustainable water management practices to promote efficient irrigation.
+                </p>
+            </div>
+        </div>
+
+
+            <!-- Card 3 -->
+            <div class="relative bg-gray-800 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 hover:shadow-green-500"
+    style="background-image: url('/images/Fo.png'); background-size: cover; background-position: center;">
     
+    <!-- Background Overlay -->
+    <div class="absolute inset-0 bg-black bg-opacity-40 rounded-xl"></div>
+
+    <!-- Content (placed inside a relative div to stay above the overlay) -->
+    <div class="relative">
+        <h3 class="text-2xl font-bold text-green-400 mb-2">Crop Mapping</h3>
+        <p class="text-white text-lg">
+            Crop mapping allows users to visualize and monitor different cropping patterns across regions. 
+            Our platform utilizes satellite imagery, remote sensing, and farmer-reported data to track crop distribution, growth stages, and 
+            productivity. This information helps farmers plan their crop cycles, assess soil suitability, and adopt precision farming techniques. 
+            Additionally, predictive analytics provides recommendations on suitable crops based on climate conditions, soil health, and market demand.
+        </p>
+    </div>
+</div>
+        </div>
+    </section>
+
+    <div class="bg-green-950">
+        <section class="max-w-6xl mx-auto px-6 py-12 ">
+            <div class="flex flex-col md:flex-row items-center bg-amber-200 shadow-lg rounded-lg overflow-hidden border-4 border-white">
+                <!-- Left Side - Image -->
+                <div class="md:w-1/3 p-4">
+                    <img src="../images/Animated.png" alt="Farmer in the field" class="w-96 h-96 object-cover">
+                </div>
+                <!-- Right Side - Content -->
+                <div class="md:w-2/3 p-8">
+                    <h2 class="text-2xl font-bold text-green-700 mb-4">ABOUT US</h2>
+                    <p class="text-gray-700 text-lg leading-relaxed">
+                        Land Insights is a platform that provides in-depth analysis of land holding patterns, 
+                        irrigation methods, cropping trends, and well depths across different regions. 
+                        Our mission is By providing in-depth analysis of land holding patterns, irrigation methods, cropping trends, and well depths across different regions, 
+        we empower farmers, researchers, and policymakers to make data-driven decisions.  
+                        <br>
+                        Our mission is to foster sustainable agricultural practices, boost productivity, and support rural communities with cutting-edge insights. 
+                        Whether you're a policymaker shaping the future of agriculture or a farmer seeking smarter strategies, 
+                        Land Insights is your go-to resource for reliable and impactful information.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+
+
+    <footer class="bg-green-800 text-white py-10">
+        <div class="container mx-auto px-5 flex flex-wrap justify-between items-start">
+            <!-- Land Research / Growing Guides -->
+            <div class="bg-green-600 p-8 rounded-lg w-full md:w-1/3 text-center">
+                <h3 class="text-xl font-bold mb-2">LAND RESEARCH</h3>
+                <p class="italic text-lg mb-3">Explore Insights on...</p>
+                <input type="text" placeholder="Search Land Data" class="w-3/4 px-4 py-3 rounded-2xl border-none text-gray-900">
+                <button class="bg-gradient-to-b from-green-900 to-green-200 text-white font-bold px-6 py-2 rounded-full shadow-md hover:bg-green-700 transition duration-300 transform hover:scale-105 mt-3">GO →</button>
+            </div>
+    
+            <!-- Information Section -->
+            <div>
+                <h3 class="text-lg font-semibold mb-3">INFORMATION</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:underline">Land Holdings</a></li>
+                    <li><a href="#" class="hover:underline">Irrigation Sources</a></li>
+                    <li><a href="#" class="hover:underline">Cropping Patterns</a></li>
+                    <li><a href="#" class="hover:underline">Well Depth Analysis</a></li>
+                </ul>
+            </div>
+    
+            <!-- My Account Section -->
+            <div>
+                <h3 class="text-lg font-semibold mb-3">MY ACCOUNT</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:underline">My Reports</a></li>
+                    <li><a href="#" class="hover:underline">Saved Data</a></li>
+                    <li><a href="#" class="hover:underline">My Preferences</a></li>
+                    <li><a href="#" class="hover:underline">Account Settings</a></li>
+                </ul>
+            </div>
+    
+            <!-- Newsletter Section -->
+            <div>
+                <h3 class="text-lg font-semibold mb-3">NEWSLETTER</h3>
+                <input type="email" placeholder="Enter Your Email" class="w-full px-4 py-3 rounded-md border-none text-gray-900">
+                <p class="text-sm mt-3">Sign up to receive the latest insights and updates.</p>
+            </div>
+    
+            <!-- Social Media -->
+            <div class="flex space-x-4 mt-6">
+                <a href="#" class="text-white text-2xl"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="text-white text-2xl"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-white text-2xl"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+    
+    
+
 </body>
 </html>
-
-
-
-
-
-
-
