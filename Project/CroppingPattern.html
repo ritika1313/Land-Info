@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cropping Patterns | Land Insights</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-green-50 text-gray-800 font-sans">
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-yellow-600 to-green-500 text-white py-20 text-center">
+    <h2 class="text-4xl font-bold mb-3">🌾 Cropping Patterns Across India</h2>
+    <p class="text-lg max-w-2xl mx-auto">Explore how regional practices, irrigation, and climate shape the cultivation of different crops in India.</p>
+  </section>
+
+  <!-- Intro Section -->
+  <section class="max-w-6xl mx-auto px-6 py-12 bg-white shadow-xl rounded-lg -mt-16 relative z-10">
+    <h3 class="text-3xl font-bold text-green-800 mb-6">📌 What are Cropping Patterns?</h3>
+    <p class="text-gray-700 mb-6 leading-relaxed">
+      Cropping patterns refer to the way crops are cultivated on farmland over time and space. They are influenced by climate, soil type, availability of irrigation, and socio-economic conditions. Understanding cropping patterns is crucial to improving agricultural productivity and sustainability.
+    </p>
+
+    <!-- Types of Cropping -->
+    <div class="grid md:grid-cols-2 gap-8 mb-12">
+      <div class="bg-green-100 p-6 rounded-lg shadow-md">
+        <h4 class="font-semibold text-lg text-green-900 mb-2">Monocropping</h4>
+        <p>Growing the same crop on the same land every year (e.g., wheat in Punjab). It's easy to manage but can deplete soil nutrients.</p>
+      </div>
+      <div class="bg-green-100 p-6 rounded-lg shadow-md">
+        <h4 class="font-semibold text-lg text-green-900 mb-2">Mixed Cropping</h4>
+        <p>Two or more crops are grown together (e.g., wheat + gram). Helps reduce the risk of crop failure.</p>
+      </div>
+      <div class="bg-green-100 p-6 rounded-lg shadow-md">
+        <h4 class="font-semibold text-lg text-green-900 mb-2">Crop Rotation</h4>
+        <p>Different crops are grown in succession (e.g., rice followed by pulses). Improves soil health and reduces pests.</p>
+      </div>
+      <div class="bg-green-100 p-6 rounded-lg shadow-md">
+        <h4 class="font-semibold text-lg text-green-900 mb-2">Intercropping</h4>
+        <p>Growing two or more crops simultaneously in the same field in a specific row pattern. Enhances land use efficiency.</p>
+      </div>
+    </div>
+
+    <!-- Regional Cropping Patterns -->
+    <h3 class="text-2xl font-bold text-green-800 mb-4">🗺️ Regional Cropping Patterns</h3>
+    <ul class="list-disc list-inside space-y-3 mb-8 text-gray-700">
+      <li><strong>North India:</strong> Wheat, rice, sugarcane, mustard</li>
+      <li><strong>South India:</strong> Rice, millets, pulses, groundnut, coconut</li>
+      <li><strong>East India:</strong> Rice, jute, tea, oilseeds</li>
+      <li><strong>West India:</strong> Cotton, groundnut, bajra, wheat</li>
+    </ul>
+
+    <!-- Chart -->
+    <!-- Chart -->
+<div class="bg-white rounded-lg p-6 shadow-md">
+    <h4 class="text-xl font-semibold text-green-900 mb-4">📊 Crop Distribution by Region</h4>
+    <div class="relative w-full h-[200px]">
+      <canvas id="cropChart"></canvas>
+    </div>
+  </div>
+  
+
+    <!-- Crops Showcase -->
+    <h3 class="text-2xl font-bold text-green-800 mt-12 mb-6">🌱 Common Crops</h3>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="bg-white shadow-lg rounded-xl p-4 text-center">
+        <img src="https://cdn-icons-png.flaticon.com/128/2909/2909766.png" alt="Wheat" class="h-16 mx-auto mb-2">
+        <p class="font-medium text-gray-700">Wheat</p>
+      </div>
+      <div class="bg-white shadow-lg rounded-xl p-4 text-center">
+        <img src="https://cdn-icons-png.flaticon.com/128/765/765843.png" alt="Rice" class="h-16 mx-auto mb-2">
+        <p class="font-medium text-gray-700">Rice</p>
+      </div>
+      <div class="bg-white shadow-lg rounded-xl p-4 text-center">
+        <img src="https://cdn-icons-png.flaticon.com/128/616/616408.png" alt="Cotton" class="h-16 mx-auto mb-2">
+        <p class="font-medium text-gray-700">Cotton</p>
+      </div>
+      <div class="bg-white shadow-lg rounded-xl p-4 text-center">
+        <img src="https://cdn-icons-png.flaticon.com/128/4299/4299783.png" alt="Sugarcane" class="h-16 mx-auto mb-2">
+        <p class="font-medium text-gray-700">Sugarcane</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-green-800 text-white py-6 text-center mt-12">
+    <p>© 2025 <span class="text-yellow-300 font-semibold">Land Insights</span>. All rights reserved.</p>
+  </footer>
+
+  <!-- Chart Script -->
+  <script>
+    const cropChart = new Chart(document.getElementById('cropChart'), {
+      type: 'bar',
+      data: {
+        labels: ['North', 'South', 'East', 'West'],
+        datasets: [
+          {
+            label: 'Wheat',
+            data: [80, 10, 15, 30],
+            backgroundColor: '#F59E0B'
+          },
+          {
+            label: 'Rice',
+            data: [60, 90, 85, 20],
+            backgroundColor: '#10B981'
+          },
+          {
+            label: 'Cotton',
+            data: [20, 25, 10, 60],
+            backgroundColor: '#6366F1'
+          },
+          {
+            label: 'Sugarcane',
+            data: [70, 50, 30, 40],
+            backgroundColor: '#EF4444'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,  // ⬅️ This allows custom height to work
+        plugins: {
+          legend: {
+            position: 'bottom'
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Crop Production Index'
+            }
+          }
+        }
+      }
+    });
+  </script>
+  
+
+</body>
+</html>
