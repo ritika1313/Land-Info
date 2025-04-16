@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regional Maps | Land Insights Explorer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  
+  <style>
+    /* Custom Color Classes (same as index.html) */
+    .bg-soil {
+      background-color: #9b7653;
+    }
+    .bg-soil-light {
+      background-color: #e6ccb2;
+    }
+    .bg-soil-dark {
+      background-color: #5d4037;
+    }
+    .text-soil {
+      color: #9b7653;
+    }
+    .text-soil-light {
+      color: #e6ccb2;
+    }
+    .text-soil-dark {
+      color: #5d4037;
+    }
+    
+    /* Water Colors */
+    .bg-water {
+      background-color: #4fc3f7;
+    }
+    .bg-water-light {
+      background-color: #b3e0ff;
+    }
+    .bg-water-dark {
+      background-color: #0277bd;
+    }
+    .text-water {
+      color: #4fc3f7;
+    }
+    .text-water-light {
+      color: #b3e0ff;
+    }
+    .text-water-dark {
+      color: #0277bd;
+    }
+    
+    /* Grass Colors */
+    .bg-grass {
+      background-color: #66bb6a;
+    }
+    .bg-grass-light {
+      background-color: #c5e1a5;
+    }
+    .bg-grass-dark {
+      background-color: #2e7d32;
+    }
+    .text-grass {
+      color: #66bb6a;
+    }
+    .text-grass-light {
+      color: #c5e1a5;
+    }
+    .text-grass-dark {
+      color: #2e7d32;
+    }
+    
+    /* Map Containers */
+    .map-container {
+      height: 500px;
+      width: 100%;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    /* Region-specific colors */
+    .bg-northern {
+      background-color: #2e7d32; /* grass-dark */
+    }
+    .bg-southern {
+      background-color: #0277bd; /* water-dark */
+    }
+    .bg-eastern {
+      background-color: #9b7653; /* soil */
+    }
+    .bg-western {
+      background-color: #5d4037; /* soil-dark */
+    }
+    .bg-central {
+      background-color: #66bb6a; /* grass */
+    }
+    
+    /* Navigation */
+    .nav-link {
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: currentColor;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .animate-fade-in {
+      animation: fadeIn 1s ease-in;
+    }
+    
+    /* Pattern background */
+    .bg-pattern {
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    
+    /* Hero Section */
+    .hero-gradient {
+      background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 50%, #4fc3f7 100%);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans">
+  <!-- Navigation -->
+  <!-- <nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="flex justify-between items-center py-4">
+        <div class="text-2xl font-bold text-grass-dark">Land Insights</div>
+        <div class="hidden md:flex space-x-8">
+          <a href="index.html" class="nav-link text-gray-700 hover:text-grass-dark">Home</a>
+          <a href="maps.html" class="nav-link text-gray-700 hover:text-grass-dark">Regional Maps</a>
+          <a href="index.html#insights" class="nav-link text-gray-700 hover:text-grass-dark">Insights</a>
+          <a href="index.html" class="nav-link text-gray-700 hover:text-grass-dark">Analysis</a>
+        </div>
+        <button class="md:hidden text-gray-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav> -->
+
+  <!-- Hero Section -->
+  <header class="hero-gradient py-8 text-white shadow-lg relative overflow-hidden">
+    <div class="absolute inset-0 bg-pattern opacity-10"></div>
+    <div class="container mx-auto px-4 md:px-6 relative z-10">
+      <div class="max-w-5xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight leading-tight animate-fade-in">
+          <span class="bg-clip-text bg-white">
+            Regional Maps
+          </span>
+        </h1>
+        <p class="text-lg md:text-xl opacity-90 max-w-3xl mx-auto mb-8 animate-fade-in">
+          Explore detailed agricultural data across different regions
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container mx-auto mt-12 px-4 md:px-6">
+    <!-- Region Navigation -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6">Jump to Region</h2>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+        <a href="#northern" class="bg-northern text-white py-3 px-4 rounded-lg text-center font-medium hover:opacity-90 transition-opacity">
+          Northern
+        </a>
+        <a href="#southern" class="bg-southern text-white py-3 px-4 rounded-lg text-center font-medium hover:opacity-90 transition-opacity">
+          Southern
+        </a>
+        <a href="#eastern" class="bg-eastern text-white py-3 px-4 rounded-lg text-center font-medium hover:opacity-90 transition-opacity">
+          Eastern
+        </a>
+        <a href="#western" class="bg-western text-white py-3 px-4 rounded-lg text-center font-medium hover:opacity-90 transition-opacity">
+          Western
+        </a>
+        <a href="#central" class="bg-central text-white py-3 px-4 rounded-lg text-center font-medium hover:opacity-90 transition-opacity">
+          Central
+        </a>
+      </div>
+    </section>
+
+    <!-- Northern Region -->
+    <section id="northern" class="mb-16 scroll-mt-20">
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div class="bg-northern text-white px-6 py-4">
+          <h2 class="text-2xl font-bold">Northern Region</h2>
+        </div>
+        <div class="p-6">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div>
+              <h3 class="text-xl font-semibold text-gray-800 mb-4">Agricultural Overview</h3>
+              <p class="text-gray-600 mb-4">The Northern Plains are characterized by intensive agriculture due to fertile alluvial soil and extensive irrigation facilities.</p>
+              <ul class="list-disc pl-5 space-y-2 mb-6">
+                <li><span class="font-medium">Primary Crops:</span> Wheat, Rice, Sugarcane</li>
+                <li><span class="font-medium">Irrigation:</span> 85% irrigated (mostly canals and tube wells)</li>
+                <li><span class="font-medium">Land Holding:</span> Average 3.7 hectares</li>
+                <li><span class="font-medium">Soil Type:</span> Alluvial (highly fertile)</li>
+              </ul>
+              <div class="bg-gray-100 p-4 rounded-lg">
+                <h4 class="font-semibold text-gray-800 mb-2">Key Features</h4>
+                <p>The region benefits from the extensive river systems and has one of the highest agricultural productivity rates in the country.</p>
+              </div>
+            </div>
+            <div>
+              <div class="map-container">
+                <div id="northernMap" class="h-full w-full"></div>
+              </div>
+              <div class="text-sm text-gray-500 text-center mt-2">
+                Interactive map showing agricultural zones in the Northern Region
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Southern Region -->
+    <section id="southern" class="mb-16 scroll-mt-20">
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div class="bg-southern text-white px-6 py-4">
+          <h2 class="text-2xl font-bold">Southern Region</h2>
+        </div>
+        <div class="p-6">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div>
+              <h3 class="text-xl font-semibold text-gray-800 mb-4">Agricultural Overview</h3>
+              <p class="text-gray-600 mb-4">The Southern Peninsula relies on well and tank irrigation, with a mix of commercial and subsistence farming.</p>
+              <ul class="list-disc pl-5 space-y-2 mb-6">
+                <li><span class="font-medium">Primary Crops:</span> Rice, Coconut, Spices</li>
+                <li><span class="font-medium">Irrigation:</span> 65% irrigated (mostly wells and tanks)</li>
+                <li><span class="font-medium">Land Holding:</span> Average 1.9 hectares</li>
+                <li><span class="font-medium">Soil Type:</span> Red and Black soils</li>
+              </ul>
+              <div class="bg-gray-100 p-4 rounded-lg">
+                <h4 class="font-semibold text-gray-800 mb-2">Key Features</h4>
+                <p>The region has a tropical climate with distinct wet and dry seasons, supporting diverse cropping patterns.</p>
+              </div>
+            </div>
+            <div>
+              <div class="map-container">
+                <div id="southernMap" class="h-full w-full"></div>
+              </div>
+              <div class="text-sm text-gray-500 text-center mt-2">
+                Interactive map showing agricultural zones in the Southern Region
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Eastern Region -->
+    <section id="eastern" class="mb-16 scroll-mt-20">
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div class="bg-eastern text-white px-6 py-4">
+          <h2 class="text-2xl font-bold">Eastern Region</h2>
+        </div>
+        <div class="p-6">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div>
+              <h3 class="text-xl font-semibold text-gray-800 mb-4">Agricultural Overview</h3>
+              <p class="text-gray-600 mb-4">The Eastern Region is characterized by high rainfall and river systems, supporting rice and jute cultivation.</p>
+              <ul class="list-disc pl-5 space-y-2 mb-6">
+                <li><span class="font-medium">Primary Crops:</span> Rice, Jute, Tea</li>
+                <li><span class="font-medium">Irrigation:</span> 60% irrigated (mostly rainwater and rivers)</li>
+                <li><span class="font-medium">Land Holding:</span> Average 1.2 hectares</li>
+                <li><span class="font-medium">Soil Type:</span> Alluvial and Laterite</li>
+              </ul>
+              <div class="bg-gray-100 p-4 rounded-lg">
+                <h4 class="font-semibold text-gray-800 mb-2">Key Features</h4>
+                <p>The region receives abundant rainfall but faces challenges with flooding and waterlogging in some areas.</p>
+              </div>
+            </div>
+            <div>
+              <div class="map-container">
+                <div id="easternMap" class="h-full w-full"></div>
+              </div>
+              <div class="text-sm text-gray-500 text-center mt-2">
+                Interactive map showing agricultural zones in the Eastern Region
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Western Region -->
+    <section id="western" class="mb-16 scroll-mt-20">
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div class="bg-western text-white px-6 py-4">
+          <h2 class="text-2xl font-bold">Western Region</h2>
+        </div>
+        <div class="p-6">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div>
+              <h3 class="text-xl font-semibold text-gray-800 mb-4">Agricultural Overview</h3>
+              <p class="text-gray-600 mb-4">The Western Region faces water scarcity and relies on tube well irrigation for crops like cotton and groundnut.</p>
+              <ul class="list-disc pl-5 space-y-2 mb-6">
+                <li><span class="font-medium">Primary Crops:</span> Cotton, Groundnut, Bajra</li>
+                <li><span class="font-medium">Irrigation:</span> 45% irrigated (mostly tube wells)</li>
+                <li><span class="font-medium">Land Holding:</span> Average 2.8 hectares</li>
+                <li><span class="font-medium">Soil Type:</span> Black and Red soils</li>
+              </ul>
+              <div class="bg-gray-100 p-4 rounded-lg">
+                <h4 class="font-semibold text-gray-800 mb-2">Key Features</h4>
+                <p>The region has semi-arid conditions with frequent droughts, making water conservation critical.</p>
+              </div>
+            </div>
+            <div>
+              <div class="map-container">
+                <div id="westernMap" class="h-full w-full"></div>
+              </div>
+              <div class="text-sm text-gray-500 text-center mt-2">
+                Interactive map showing agricultural zones in the Western Region
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Central Region -->
+    <section id="central" class="mb-16 scroll-mt-20">
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div class="bg-central text-white px-6 py-4">
+          <h2 class="text-2xl font-bold">Central Region</h2>
+        </div>
+        <div class="p-6">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div>
+              <h3 class="text-xl font-semibold text-gray-800 mb-4">Agricultural Overview</h3>
+              <p class="text-gray-600 mb-4">The Central Region has a mix of rainfed and irrigated agriculture, with soybean and pulses as major crops.</p>
+              <ul class="list-disc pl-5 space-y-2 mb-6">
+                <li><span class="font-medium">Primary Crops:</span> Soybean, Pulses, Wheat</li>
+                <li><span class="font-medium">Irrigation:</span> 55% irrigated (wells and tanks)</li>
+                <li><span class="font-medium">Land Holding:</span> Average 2.4 hectares</li>
+                <li><span class="font-medium">Soil Type:</span> Black and Alluvial soils</li>
+              </ul>
+              <div class="bg-gray-100 p-4 rounded-lg">
+                <h4 class="font-semibold text-gray-800 mb-2">Key Features</h4>
+                <p>The region serves as an important pulse-producing area and has seen recent growth in soybean cultivation.</p>
+              </div>
+            </div>
+            <div>
+              <div class="map-container">
+                <div id="centralMap" class="h-full w-full"></div>
+              </div>
+              <div class="text-sm text-gray-500 text-center mt-2">
+                Interactive map showing agricultural zones in the Central Region
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <!-- <footer class="bg-soil-dark text-white py-12">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-xl font-semibold mb-4">Land Insights Explorer</h3>
+          <p class="text-soil-light">Providing comprehensive agricultural data analysis for better land management decisions.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="text-soil-light hover:text-white transition-colors">Home</a></li>
+            <li><a href="maps.html" class="text-soil-light hover:text-white transition-colors">Regional Maps</a></li>
+            <li><a href="index.html#insights" class="text-soil-light hover:text-white transition-colors">Key Insights</a></li>
+            <li><a href="index.html#regional-analysis" class="text-soil-light hover:text-white transition-colors">Regional Analysis</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold mb-4">Contact</h3>
+          <p class="text-soil-light">Email: info@landinsights.com</p>
+          <p class="text-soil-light">Phone: +1 (555) 123-4567</p>
+        </div>
+      </div>
+      <div class="border-t border-soil mt-8 pt-8 text-center text-soil-light">
+        <p>&copy; 2023 Land Insights Explorer. All rights reserved.</p>
+      </div>
+    </div>
+  </footer> -->
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize all maps
+      initNorthernMap();
+      initSouthernMap();
+      initEasternMap();
+      initWesternMap();
+      initCentralMap();
+    });
+
+    // Northern Region Map
+    function initNorthernMap() {
+      const map = L.map('northernMap').setView([28.6, 77.2], 6);
+      
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+      
+      // Add some sample regions (in a real app, these would be proper GeoJSON shapes)
+      L.circle([29.5, 76.5], {radius: 80000, color: '#2e7d32', fillColor: '#66bb6a', fillOpacity: 0.5})
+        .bindPopup("<b>Wheat Belt</b><br>Primary wheat growing area")
+        .addTo(map);
+      
+      L.circle([27.5, 78.5], {radius: 70000, color: '#2e7d32', fillColor: '#66bb6a', fillOpacity: 0.5})
+        .bindPopup("<b>Rice Zone</b><br>Main rice cultivation area")
+        .addTo(map);
+      
+      L.circle([26.5, 80.5], {radius: 60000, color: '#2e7d32', fillColor: '#66bb6a', fillOpacity: 0.5})
+        .bindPopup("<b>Sugarcane Region</b><br>Major sugarcane production")
+        .addTo(map);
+    }
+
+    // Southern Region Map
+    function initSouthernMap() {
+      const map = L.map('southernMap').setView([12.9, 78.5], 6);
+      
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+      
+      // Add some sample regions
+      L.circle([13.5, 79.5], {radius: 80000, color: '#0277bd', fillColor: '#4fc3f7', fillOpacity: 0.5})
+        .bindPopup("<b>Rice Growing Area</b><br>Main rice cultivation zone")
+        .addTo(map);
+      
+      L.circle([11.5, 76.5], {radius: 70000, color: '#0277bd', fillColor: '#4fc3f7', fillOpacity: 0.5})
+        .bindPopup("<b>Coconut Belt</b><br>Major coconut production")
+        .addTo(map);
+      
+      L.circle([10.5, 78.5], {radius: 60000, color: '#0277bd', fillColor: '#4fc3f7', fillOpacity: 0.5})
+        .bindPopup("<b>Spice Region</b><br>Cardamom, pepper and other spices")
+        .addTo(map);
+    }
+
+    // Eastern Region Map
+    function initEasternMap() {
+      const map = L.map('easternMap').setView([22.5, 88.3], 6);
+      
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+      
+      // Add some sample regions
+      L.circle([23.5, 88.5], {radius: 80000, color: '#9b7653', fillColor: '#e6ccb2', fillOpacity: 0.5})
+        .bindPopup("<b>Rice Bowl</b><br>Major rice production area")
+        .addTo(map);
+      
+      L.circle([22.5, 90.5], {radius: 70000, color: '#9b7653', fillColor: '#e6ccb2', fillOpacity: 0.5})
+        .bindPopup("<b>Jute Belt</b><br>Primary jute growing region")
+        .addTo(map);
+      
+      L.circle([26.5, 92.5], {radius: 60000, color: '#9b7653', fillColor: '#e6ccb2', fillOpacity: 0.5})
+        .bindPopup("<b>Tea Region</b><br>Major tea plantations")
+        .addTo(map);
+    }
+
+    // Western Region Map
+    function initWesternMap() {
+      const map = L.map('westernMap').setView([19.0, 74.0], 6);
+      
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+      
+      // Add some sample regions
+      L.circle([19.5, 75.5], {radius: 80000, color: '#5d4037', fillColor: '#9b7653', fillOpacity: 0.5})
+        .bindPopup("<b>Cotton Belt</b><br>Major cotton growing area")
+        .addTo(map);
+      
+      L.circle([18.5, 73.5], {radius: 70000, color: '#5d4037', fillColor: '#9b7653', fillOpacity: 0.5})
+        .bindPopup("<b>Groundnut Zone</b><br>Primary groundnut production")
+        .addTo(map);
+      
+      L.circle([20.5, 72.5], {radius: 60000, color: '#5d4037', fillColor: '#9b7653', fillOpacity: 0.5})
+        .bindPopup("<b>Bajra Region</b><br>Millet cultivation area")
+        .addTo(map);
+    }
+
+    // Central Region Map
+    function initCentralMap() {
+      const map = L.map('centralMap').setView([23.0, 79.0], 6);
+      
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+      
+      // Add some sample regions
+      L.circle([22.5, 77.5], {radius: 80000, color: '#66bb6a', fillColor: '#c5e1a5', fillOpacity: 0.5})
+        .bindPopup("<b>Soybean Belt</b><br>Major soybean production")
+        .addTo(map);
+      
+      L.circle([23.5, 80.5], {radius: 70000, color: '#66bb6a', fillColor: '#c5e1a5', fillOpacity: 0.5})
+        .bindPopup("<b>Pulse Zone</b><br>Primary pulse growing area")
+        .addTo(map);
+      
+      L.circle([21.5, 78.5], {radius: 60000, color: '#66bb6a', fillColor: '#c5e1a5', fillOpacity: 0.5})
+        .bindPopup("<b>Wheat Region</b><br>Secondary wheat growing area")
+        .addTo(map);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Irrigation Sources | Land Insights</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-green-50 text-gray-800 font-sans">
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-green-700 to-green-500 text-white py-20 text-center">
+    <h2 class="text-4xl font-bold mb-3">💧 Irrigation Sources in India</h2>
+    <p class="text-lg max-w-2xl mx-auto">Understanding the backbone of Indian agriculture through various irrigation methods practiced across different regions.</p>
+  </section>
+
+  <!-- Content Section -->
+  <section class="max-w-6xl mx-auto px-6 py-12 bg-green-100 shadow-2xl rounded-lg -mt-16 relative z-10">
+    <h3 class="text-3xl font-bold text-green-800 mb-6">🔍 Overview</h3>
+    <p class="mb-6 text-gray-700 leading-relaxed">
+      India’s agriculture depends heavily on irrigation due to uneven rainfall. The country uses both traditional and modern irrigation sources, which vary by geography and water availability. These systems are critical for ensuring food security and improving crop productivity across diverse climatic zones.
+    </p>
+
+    <!-- Grid Layout for Content and Pie Chart -->
+    <div class="grid md:grid-cols-2 gap-10">
+      <div class="space-y-6">
+        <ul class="list-disc list-inside text-gray-800 space-y-4">
+          <li>
+            <span class="text-lg font-bold text-green-900">Canals:</span>
+            Man-made waterways that divert river water to agricultural fields. They are crucial in regions like Punjab, Haryana, and Uttar Pradesh, where rivers such as the Ganges and Sutlej provide a steady water source. Canal irrigation supports large-scale crop cultivation and is maintained through government-funded infrastructure.
+          </li>
+          <li>
+            <span class="text-lg font-bold text-green-900">Tubewells:</span>
+            Deep-bore wells that draw water from underground aquifers using electric or diesel pumps. Common in the Indo-Gangetic plains, tubewells provide a reliable water source during dry spells and are widely used for paddy and wheat farming.
+          </li>
+          <li>
+            <span class="text-lg font-bold text-green-900">Dug Wells:</span>
+            Traditional shallow wells dug manually and used mainly in Maharashtra and Gujarat. Although less efficient, they are a cost-effective solution for small and marginal farmers with limited access to modern irrigation facilities.
+          </li>
+          <li>
+            <span class="text-lg font-bold text-green-900">Ponds & Tanks:</span>
+            Surface water reservoirs that store rainwater, especially prevalent in South and Eastern India. They play a key role in recharging groundwater and supporting irrigation during dry seasons.
+          </li>
+          <li>
+            <span class="text-lg font-bold text-green-900">Drip & Sprinkler Systems:</span>
+            Advanced irrigation methods designed for water conservation. Drip systems deliver water directly to the roots, minimizing wastage, while sprinklers simulate rainfall. These systems are essential in arid regions like Rajasthan and are promoted under various government schemes.
+          </li>
+        </ul>
+      </div>
+
+      <!-- Pie Chart on the Right -->
+      <div class="flex justify-center items-center">
+        <canvas id="irrigationChart"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-green-800 text-white py-6 text-center mt-12">
+    <p>© 2025 <span class="text-yellow-300 font-semibold">Land Insights</span>. All rights reserved.</p>
+  </footer>
+
+  <!-- Chart.js Script -->
+  <script>
+    const ctx = document.getElementById('irrigationChart').getContext('2d');
+    const irrigationChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Canals', 'Tubewells', 'Dug Wells', 'Ponds & Tanks', 'Drip & Sprinkler'],
+        datasets: [{
+          label: 'Irrigation Sources in India',
+          data: [30, 40, 10, 10, 10], // Example data in percentage
+          backgroundColor: ['#1E3A8A', '#2563EB', '#3B82F6', '#60A5FA', '#93C5FD'], // Different shades of blue
+          borderColor: '#ffffff',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: {
+              font: {
+                size: 14
+              }
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(tooltipItem) {
+                return tooltipItem.label + ': ' + tooltipItem.raw + '%';
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

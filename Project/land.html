@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Land | Land Insights</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gradient-to-br from-green-100 via-green-50 to-white text-gray-800 font-sans tracking-wide">
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-green-900 via-green-700 to-green-600 text-white py-20 text-center shadow-lg">
+    <h1 class="text-5xl font-extrabold mb-3">🌱 Land Holding Patterns in India</h1>
+    <p class="text-lg max-w-3xl mx-auto">An insightful view into how land is distributed across regions and its impact on agriculture in India.</p>
+  </section>
+
+  <!-- Content Container -->
+  <section class="max-w-7xl mx-auto px-6 py-16">
+
+    <!-- Overview -->
+    <div class="bg-white/90 backdrop-blur-lg p-8 rounded-3xl shadow-2xl mb-10 border-l-8 border-green-500">
+      <h2 class="text-3xl font-bold text-green-900 mb-4">📘 Overview</h2>
+      <p class="text-gray-700 text-lg">
+        Landholding refers to the area of land a person or household owns or cultivates. In India, unequal distribution of land remains a significant challenge for equitable agricultural growth. Most farmers fall under the marginal or small category, leading to issues in productivity and access to institutional support.
+      </p>
+    </div>
+
+    <!-- Classification Section -->
+    <div class="bg-gradient-to-br from-green-200 to-green-100 p-8 rounded-3xl shadow-xl mb-10">
+      <h3 class="text-2xl font-bold text-green-900 mb-4">📊 Landholding Categories</h3>
+      <ul class="list-disc list-inside space-y-2 text-gray-800 text-lg">
+        <li><strong>Marginal:</strong> &lt; 1 hectare – Predominantly for self-subsistence.</li>
+        <li><strong>Small:</strong> 1–2 hectares – Often family-operated farms.</li>
+        <li><strong>Semi-Medium:</strong> 2–4 hectares – Some mechanization possible.</li>
+        <li><strong>Medium:</strong> 4–10 hectares – Moderate productivity with better access to irrigation.</li>
+        <li><strong>Large:</strong> &gt; 10 hectares – Highly mechanized, usually for commercial farming.</li>
+      </ul>
+    </div>
+
+    <!-- Regional Insights -->
+    <div class="bg-white p-8 rounded-3xl shadow-xl mb-10 border-t-4 border-green-600">
+      <h3 class="text-2xl font-bold text-green-800 mb-4">🌍 Regional Analysis</h3>
+      <p class="text-gray-700 text-lg mb-4">Regional trends in landholding:</p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <ul class="list-disc list-inside text-gray-800 text-base space-y-2">
+          <li><strong>Punjab & Haryana:</strong> Larger holdings due to agricultural prosperity.</li>
+          <li><strong>Bihar & West Bengal:</strong> Fragmented marginal farms dominate.</li>
+        </ul>
+        <ul class="list-disc list-inside text-gray-800 text-base space-y-2">
+          <li><strong>Kerala & Tamil Nadu:</strong> Better equality post land reforms.</li>
+          <li><strong>Gujarat & Maharashtra:</strong> Medium-sized holdings are more common.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Challenges -->
+    <div class="bg-yellow-100 p-8 rounded-3xl shadow-xl mb-10">
+      <h3 class="text-2xl font-bold text-yellow-800 mb-4">⚠️ Key Challenges</h3>
+      <ul class="list-disc list-inside text-gray-800 text-lg space-y-2">
+        <li>Fragmented and scattered plots lower efficiency.</li>
+        <li>Lack of formal land titles limits access to credit.</li>
+        <li>Inequitable distribution across communities.</li>
+        <li>Limited adoption of cooperative farming models.</li>
+      </ul>
+    </div>
+
+    <!-- Pie Chart -->
+    <div class="bg-white p-8 rounded-3xl shadow-xl border border-green-200">
+      <h3 class="text-2xl font-bold text-green-800 mb-6">📈 Landholding Distribution (National %)</h3>
+      <div class="flex justify-center items-center h-[300px]">
+        <canvas id="landChart" class="max-w-[400px] w-full"></canvas>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-green-800 text-white py-6 text-center mt-16 shadow-inner">
+    <p>© 2025 <span class="text-yellow-300 font-semibold">Land Insights</span>. All rights reserved.</p>
+  </footer>
+
+  <!-- Chart.js Script -->
+  <script>
+    const ctx = document.getElementById('landChart').getContext('2d');
+    const landChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Marginal', 'Small', 'Semi-Medium', 'Medium', 'Large'],
+        datasets: [{
+          data: [68, 18, 8, 5, 1],
+          backgroundColor: ['#bbf7d0', '#86efac', '#4ade80', '#22c55e', '#15803d'],
+          borderColor: '#fff',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'right',
+            labels: {
+              font: {
+                size: 14
+              }
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.label + ': ' + context.raw + '%';
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

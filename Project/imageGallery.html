@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Enhanced Land Insights Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f2f6f3;
+      color: #2e3d27;
+    }
+
+    .gallery-container {
+      text-align: center;
+      padding: 60px 20px;
+      background: linear-gradient(to right, #dff1cf, #f4fdf1);
+      border-bottom: 2px solid #c3e6c6;
+    }
+
+    .gallery-container h2 {
+      font-size: 40px;
+      color: #365535;
+      margin-bottom: 10px;
+    }
+
+    .gallery-container p {
+      color: #5a6f54;
+      font-size: 18px;
+      max-width: 700px;
+      margin: 0 auto 50px;
+    }
+
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        padding: 0 20px;
+        max-width: 1100px;
+        margin: auto;
+        }
+
+        @media (max-width: 768px) {
+        .gallery-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        }
+
+        @media (max-width: 480px) {
+        .gallery-grid {
+            grid-template-columns: 1fr;
+        }
+        }
+
+
+    .gallery-card {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .gallery-card:hover {
+      transform: scale(1.04);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .gallery-caption {
+      padding: 12px 16px;
+      font-size: 15px;
+      background-color: #f9fff4;
+      color: #476240;
+      font-weight: 500;
+      border-top: 1px solid #e2f0d6;
+    }
+
+    /* Lightbox Overlay */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(255, 255, 255, 0.2);
+    }
+
+    .lightbox.show {
+      display: flex;
+    }
+
+    @media screen and (max-width: 768px) {
+      .gallery-card img {
+        height: 160px;
+      }
+
+      .gallery-container h2 {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="gallery-container">
+    <h2>🌿 Land & Agriculture Gallery</h2>
+    <p>Capturing the essence of land holding patterns, irrigation methods, and cropping insights — straight from the heart of rural India 🌾</p>
+
+    <div class="gallery-grid">
+      <div class="gallery-card">
+        <img src="/images/Farmer.png" alt="Farmers">
+        <div class="gallery-caption">Farmers harvesting crops</div>
+      </div>
+      <div class="gallery-card">
+        <img src="/images/Irrigation.png" alt="Irrigation">
+        <div class="gallery-caption">Modern irrigation systems</div>
+      </div>
+      <div class="gallery-card">
+        <img src="/images/Fields.png" alt="Paddy">
+        <div class="gallery-caption">Lush green paddy fields</div>
+      </div>
+      <div class="gallery-card">
+        <img src="/images/Agriculture.png" alt="Farming">
+        <div class="gallery-caption">Rural Indian agriculture</div>
+      </div>
+      <div class="gallery-card">
+        <img src="/images/Wheat.png" alt="Wheat">
+        <div class="gallery-caption">Golden wheat ready for harvest</div>
+      </div>
+      <div class="gallery-card">
+        <img src="/images/Well.png" alt="Well">
+        <div class="gallery-caption">Traditional irrigation well</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <img src="" alt="Expanded View" />
+  </div>
+
+  <script>
+    const cards = document.querySelectorAll('.gallery-card img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+
+    cards.forEach(img => {
+      img.addEventListener('click', () => {
+        lightbox.classList.add('show');
+        lightboxImg.src = img.src;
+      });
+    });
+
+    lightbox.addEventListener('click', () => {
+      lightbox.classList.remove('show');
+      lightboxImg.src = '';
+    });
+  </script>
+
+</body>
+</html>
