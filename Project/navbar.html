@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Land Insights</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
 </head>
 <body class="bg-gray-900 text-white">
 
@@ -55,7 +60,7 @@
                 </div>
             
                 <!-- Signup Button -->
-                <a href="Signup.html" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600 transition">
+                <a id="auth-button" href="Signup.html" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600 transition">
                     Signup
                 </a>
             </div>
@@ -78,14 +83,16 @@
                 Our platform provides comprehensive analysis of land holdings, irrigation systems, 
                 and cropping patterns to enhance agricultural productivity.
             </p>
-            <button class="bg-green-500 hover:bg-green-600 text-black text-xl font-bold px-8 py-4 mt-6 rounded-lg transition-all duration-300 hover:scale-110 animate-pulse">
+            <a href="#highlights">
+              <button class="bg-green-500 hover:bg-green-600 text-black text-xl font-bold px-8 py-4 mt-6 rounded-lg transition-all duration-300 hover:scale-110 animate-pulse">
                 Get Started
-            </button>
+              </button>
+            </a>
         </div>
     </section>
 
     <!-- Key Highlights Section -->
-    <section class="py-16 px-8">
+    <section class="py-16 px-8" id="highlights">
         <h2 class="text-3xl font-bold text-center text-green-200 mb-10">Key Highlights</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
@@ -276,27 +283,27 @@
 
     <div class="gallery-grid">
       <div class="gallery-card">
-        <img src="/images/Farmer.png" alt="Farmers">
+        <img src="../images/Farmer.png" alt="Farmers">
         <div class="gallery-caption">Farmers harvesting crops</div>
       </div>
       <div class="gallery-card">
-        <img src="/images/Irrigation.png" alt="Irrigation">
+        <img src="../images/Irrigation.png" alt="Irrigation">
         <div class="gallery-caption">Modern irrigation systems</div>
       </div>
       <div class="gallery-card">
-        <img src="/images/Fields.png" alt="Paddy">
+        <img src="../images/Fields.png" alt="Paddy">
         <div class="gallery-caption">Lush green paddy fields</div>
       </div>
       <div class="gallery-card">
-        <img src="/images/Agriculture.png" alt="Farming">
+        <img src="../images/Agriculture.png" alt="Farming">
         <div class="gallery-caption">Rural Indian agriculture</div>
       </div>
       <div class="gallery-card">
-        <img src="/images/Wheat.png" alt="Wheat">
+        <img src="../images/Wheat.png" alt="Wheat">
         <div class="gallery-caption">Golden wheat ready for harvest</div>
       </div>
       <div class="gallery-card">
-        <img src="/images/Well.png" alt="Well">
+        <img src="../images/Well.png" alt="Well">
         <div class="gallery-caption">Traditional irrigation well</div>
       </div>
     </div>
@@ -408,5 +415,8 @@
         © 2025 <span class="text-amber-300 font-semibold">Land Insights</span>. Designed with 🌱 by Pallavi.
       </div>
     </footer>
+    
+    
+
 </body>
 </html>
